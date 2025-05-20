@@ -65,7 +65,16 @@ export async function POST(request: Request) {
 
     // Fetch README content from GitHub API
     const readmeUrl = `https://api.github.com/repos/${owner}/${repo}/readme`;
-    const readmeResponse = await fetch(readmeUrl);
+    const headers: HeadersInit = {
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    
+    // Add GitHub token if available
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+    }
+    
+    const readmeResponse = await fetch(readmeUrl, { headers });
     
     if (!readmeResponse.ok) {
       const response: GitHubSummarizerResponse = {
