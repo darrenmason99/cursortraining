@@ -5,13 +5,38 @@ import { useRouter } from 'next/navigation';
 
 export default function Playground() {
   const [apiKey, setApiKey] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Store the API key in localStorage for validation
-    localStorage.setItem('apiKey', apiKey);
-    router.push('/protected');
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/validate-key', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ apiKey }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to validate API key');
+      }
+
+      // Store the API key in localStorage for future use
+      localStorage.setItem('apiKey', apiKey);
+      router.push('/protected');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -34,12 +59,16 @@ export default function Playground() {
                   placeholder="Enter your API key"
                   required
                 />
+                {error && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
+                )}
               </div>
               <button
                 type="submit"
-                className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors"
+                disabled={isLoading}
+                className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit
+                {isLoading ? 'Validating...' : 'Submit'}
               </button>
             </form>
           </div>
