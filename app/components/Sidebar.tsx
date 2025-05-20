@@ -1,4 +1,8 @@
+'use client';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
+import Image from 'next/image';
+import { useState, useRef, useEffect } from 'react';
 
 interface SidebarProps {
   collapsed: boolean;
@@ -40,10 +44,72 @@ const navLinks = [
 ];
 
 export default function Sidebar({ collapsed, toggleSidebar }: SidebarProps) {
+  const { data: session } = useSession();
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: '/auth/signin' });
+  };
+
   return (
     <aside className={`h-screen bg-white shadow-lg rounded-r-3xl flex flex-col py-8 px-2 transition-all duration-200 ${collapsed ? 'w-20' : 'w-64 px-6'}`}>
       <div className="mb-10 flex items-center justify-between">
-        <span className={`text-3xl font-extrabold tracking-tight text-gray-900 transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>Dandi <span className="font-light">AI</span></span>
+        <div className="flex items-center gap-3">
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => session && setShowMenu(!showMenu)}
+              className={`w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden flex items-center justify-center ${session ? 'cursor-pointer hover:ring-2 hover:ring-purple-500 transition-all' : ''}`}
+            >
+              {session?.user?.image ? (
+                <Image
+                  src={session.user.image}
+                  alt="Profile"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <svg
+                  className="w-6 h-6 text-gray-400 dark:text-gray-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                </svg>
+              )}
+            </button>
+            
+            {/* Dropdown Menu */}
+            {showMenu && session && (
+              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+                <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{session.user?.name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{session.user?.email}</p>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
+          <span className={`text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>Dandi <span className="font-light">AI</span></span>
+        </div>
         <button
           onClick={toggleSidebar}
           className="p-2 rounded hover:bg-gray-100 text-gray-500 focus:outline-none"
