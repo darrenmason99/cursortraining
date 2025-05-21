@@ -12,11 +12,9 @@ export default withAuth(
   }
 );
 
-// Specify which routes to protect
+// Require authentication for all routes except sign-in, Next.js internals, API routes, and static files
 export const config = {
   matcher: [
-    "/protected/:path*",
-    "/dashboard/:path*",
-    // Add other protected routes here
+    "/((?!_next|api|auth/signin|favicon.ico|robots.txt|images|public).*)",
   ],
 }; 

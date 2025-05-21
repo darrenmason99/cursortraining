@@ -40,38 +40,48 @@ export default function Playground() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">API Playground</h1>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Enter your API Key
-                </label>
-                <input
-                  type="text"
-                  id="apiKey"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white"
-                  placeholder="Enter your API key"
-                  required
-                />
-                {error && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
-                )}
-              </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? 'Validating...' : 'Submit'}
-              </button>
-            </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-blue-100 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-lg w-full space-y-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-12 border border-gray-100 dark:border-gray-800">
+          <div className="flex flex-col items-center">
+            <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-gray-700 mb-6 flex items-center justify-center shadow">
+              <svg className="w-12 h-12 text-blue-500 dark:text-blue-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-extrabold text-center text-gray-900 dark:text-white mb-2">
+              API Playground
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-300 text-center mb-6">
+              Enter your API key to access the playground features.
+            </p>
           </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="apiKey" className="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
+                API Key
+              </label>
+              <input
+                type="text"
+                id="apiKey"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                className="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white text-lg"
+                placeholder="Enter your API key"
+                required
+              />
+              {error && (
+                <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
+              )}
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? 'Validating...' : 'Submit'}
+            </button>
+          </form>
         </div>
       </div>
     </div>
