@@ -176,7 +176,7 @@ export default function Dashboard() {
               </div>
               <Link
                 href="/"
-                className="rounded-md bg-gray-600/10 dark:bg-gray-600/20 px-3.5 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-600/20 dark:hover:bg-gray-600/30 transition-colors"
+                className="rounded-lg bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 hover:from-purple-500 hover:to-yellow-400 transition-all duration-200 px-4 py-2.5 text-sm font-bold text-white shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
               >
                 Back to Home
               </Link>
@@ -190,7 +190,7 @@ export default function Dashboard() {
                 <div className="text-sm opacity-90 mb-2">CURRENT PLAN</div>
                 <h2 className="text-3xl font-bold">Researcher</h2>
               </div>
-              <button className="bg-white/10 hover:bg-white/20 transition-colors rounded-md px-4 py-2 text-sm font-semibold">
+              <button className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-5 py-2 text-sm font-bold shadow-lg text-white flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-pink-400">
                 Manage Plan
               </button>
             </div>
@@ -215,7 +215,7 @@ export default function Dashboard() {
                 </div>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors rounded-md px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white"
+                  className="flex items-center gap-2 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-5 py-2 text-sm font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
