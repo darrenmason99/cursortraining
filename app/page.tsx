@@ -12,7 +12,7 @@ export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <Github className="h-6 w-6" />
             <span className="text-xl font-bold">Dandi</span>
@@ -31,7 +31,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             {status === "authenticated" ? (
               <>
-                <div className="flex items-center gap-2">
+                <div className="hidden md:flex items-center gap-2">
                   {session.user?.image && (
                     <Image
                       src={session.user.image}
@@ -53,7 +53,7 @@ export default function LandingPage() {
             ) : (
               <>
                 <Link href="/auth/signin">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="hidden md:inline-flex">
                     Log in
                   </Button>
                 </Link>
@@ -76,7 +76,7 @@ export default function LandingPage() {
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl/none">
                     Unlock the power of GitHub repositories
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
@@ -89,7 +89,7 @@ export default function LandingPage() {
                     <Link href="/dashboards">
                       <Button
                         size="lg"
-                        className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
+                        className="w-full min-[400px]:w-auto bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
                       >
                         Go to Dashboard
                         <ArrowRight className="h-4 w-4" />
@@ -99,7 +99,7 @@ export default function LandingPage() {
                     <Link href="/auth/signin">
                       <Button
                         size="lg"
-                        className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
+                        className="w-full min-[400px]:w-auto bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
                       >
                         Get started for free
                         <ArrowRight className="h-4 w-4" />
@@ -107,7 +107,7 @@ export default function LandingPage() {
                     </Link>
                   )}
                   <Link href="#how-it-works">
-                    <Button size="lg" variant="outline">
+                    <Button size="lg" variant="outline" className="w-full min-[400px]:w-auto">
                       See how it works
                     </Button>
                   </Link>
@@ -126,29 +126,6 @@ export default function LandingPage() {
                         React is a JavaScript library for building user interfaces. Declarative, component-based, and
                         learn-once-write-anywhere.
                       </p>
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="rounded-lg border p-2">
-                        <div className="flex items-center gap-2">
-                          <Star className="h-4 w-4 text-yellow-500" />
-                          <div className="text-sm font-medium">Stars</div>
-                        </div>
-                        <div className="text-xl font-bold">212.5k</div>
-                      </div>
-                      <div className="rounded-lg border p-2">
-                        <div className="flex items-center gap-2">
-                          <GitPullRequest className="h-4 w-4 text-blue-500" />
-                          <div className="text-sm font-medium">PRs</div>
-                        </div>
-                        <div className="text-xl font-bold">14.2k</div>
-                      </div>
-                      <div className="rounded-lg border p-2">
-                        <div className="flex items-center gap-2">
-                          <GitBranch className="h-4 w-4 text-green-500" />
-                          <div className="text-sm font-medium">Version</div>
-                        </div>
-                        <div className="text-xl font-bold">v18.2.0</div>
-                      </div>
                     </div>
                     <div className="space-y-2">
                       <div className="text-sm font-medium">Recent Activity</div>
@@ -341,7 +318,7 @@ export default function LandingPage() {
                 Start for free, upgrade as you grow. No hidden fees or surprises.
               </p>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-3">
+            <div className="mx-auto grid max-w-5xl gap-6 py-12 sm:grid-cols-2 lg:grid-cols-3">
               <div className="relative overflow-hidden rounded-lg border bg-background p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
@@ -480,7 +457,7 @@ export default function LandingPage() {
                   <Link href="/dashboards">
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
+                      className="w-full min-[400px]:w-auto bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
                     >
                       Go to Dashboard
                       <ArrowRight className="h-4 w-4" />
@@ -490,7 +467,7 @@ export default function LandingPage() {
                   <Link href="/auth/signin">
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
+                      className="w-full min-[400px]:w-auto bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 hover:from-pink-500 hover:to-purple-500 transition-all duration-200 rounded-lg px-6 font-bold shadow-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-400 gap-1.5"
                     >
                       Get started for free
                       <ArrowRight className="h-4 w-4" />
@@ -498,7 +475,7 @@ export default function LandingPage() {
                   </Link>
                 )}
                 <Link href="/contact">
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="outline" className="w-full min-[400px]:w-auto">
                     Contact sales
                   </Button>
                 </Link>

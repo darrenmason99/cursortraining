@@ -36,22 +36,22 @@ export function ApiKeyTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-        <thead className="bg-gray-50 dark:bg-gray-900">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Key</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Usage</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Created</th>
-            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Options</th>
-          </tr>
-        </thead>
-        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="bg-gray-50 dark:bg-gray-900">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 px-6 py-3">
+            <div className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</div>
+            <div className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Key</div>
+            <div className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Usage</div>
+            <div className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Created</div>
+            <div className="text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Options</div>
+          </div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
           {apiKeys.map((key) => (
-            <tr key={key.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-              <td className="px-6 py-4 whitespace-nowrap">
+            <div key={key.id} className="grid grid-cols-1 md:grid-cols-5 gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+              <div className="flex items-center">
                 {editingId === key.id ? (
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 w-full">
                     <input
                       type="text"
                       value={editingName}
@@ -74,10 +74,10 @@ export function ApiKeyTable({
                 ) : (
                   <span className="text-sm font-medium text-gray-900 dark:text-white">{key.name}</span>
                 )}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center gap-2">
-                  <code className="text-sm font-mono text-gray-600 dark:text-gray-300">
+              </div>
+              <div className="flex items-center">
+                <div className="flex items-center gap-2 w-full">
+                  <code className="text-sm font-mono text-gray-600 dark:text-gray-300 break-all">
                     {visibleKeys.has(key.id) ? key.value : getObfuscatedKey(key.value)}
                   </code>
                   <div className="flex items-center gap-1">
@@ -108,16 +108,16 @@ export function ApiKeyTable({
                     </button>
                   </div>
                 </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              </div>
+              <div className="flex items-center">
                 <span className="text-sm text-gray-500 dark:text-gray-400">{key.usage}</span>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              </div>
+              <div className="flex items-center">
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                   {new Date(key.created_at).toLocaleDateString()}
                 </span>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              </div>
+              <div className="flex items-center justify-end">
                 <div className="flex justify-end gap-2">
                   {editingId !== key.id && (
                     <button
@@ -138,18 +138,16 @@ export function ApiKeyTable({
                     </svg>
                   </button>
                 </div>
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
           {apiKeys.length === 0 && (
-            <tr>
-              <td colSpan={5} className="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
-                No API keys found. Create one to get started.
-              </td>
-            </tr>
+            <div className="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+              No API keys found. Create one to get started.
+            </div>
           )}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 } 

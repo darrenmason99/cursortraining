@@ -20,12 +20,12 @@ export function CreateKeyModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-start justify-center z-50 pt-20" onClick={onClose}>
+    <div className="fixed inset-0 flex items-start justify-center z-50 pt-20 px-4" onClick={onClose}>
       <div 
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-200 dark:border-gray-700" 
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-md mx-auto border border-gray-200 dark:border-gray-700" 
         onClick={e => e.stopPropagation()}
       >
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
               Create a new API key
@@ -80,17 +80,17 @@ export function CreateKeyModal({
             </div>
           </div>
 
-          <div className="mt-6 flex justify-end space-x-3">
+          <div className="mt-6 flex flex-col sm:flex-row justify-end gap-3">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={onSubmit}
               disabled={!keyName.trim()}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Create
             </button>
