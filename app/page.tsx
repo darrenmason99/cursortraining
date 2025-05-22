@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Github, BarChart3, GitPullRequest, Star, GitBranch, ArrowRight, Check } from "lucide-react"
 import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
+import { TryItOut } from "@/components/try-it-out"
 
 export default function LandingPage() {
   const { data: session, status } = useSession();
@@ -150,7 +151,19 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
+        <section id="try-it-out" className="py-12 md:py-24 lg:py-32 border-t">
+          <div className="container px-4 md:px-6">
+            <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+              <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Try Dandi Now</h2>
+              <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+                Experience the power of Dandi by analyzing any GitHub repository. Enter a URL below to get started.
+              </p>
+            </div>
+            <div className="mx-auto mt-12">
+              <TryItOut />
+            </div>
+          </div>
+        </section>
         <section id="features" className="bg-muted py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
@@ -358,6 +371,11 @@ export default function LandingPage() {
                     Popular
                   </div>
                 </div>
+                <div className="absolute left-0 top-0 p-1">
+                  <div className="rounded-r-lg bg-yellow-500 px-3 py-1 text-xs font-medium text-white">
+                    Coming Soon
+                  </div>
+                </div>
                 <div className="mb-4 flex items-center justify-between">
                   <div>
                     <h3 className="text-2xl font-bold">Pro</h3>
@@ -395,6 +413,11 @@ export default function LandingPage() {
                 </Link>
               </div>
               <div className="relative overflow-hidden rounded-lg border bg-background p-6">
+                <div className="absolute left-0 top-0 p-1">
+                  <div className="rounded-r-lg bg-yellow-500 px-3 py-1 text-xs font-medium text-white">
+                    Coming Soon
+                  </div>
+                </div>
                 <div className="mb-4 flex items-center justify-between">
                   <div>
                     <h3 className="text-2xl font-bold">Enterprise</h3>
